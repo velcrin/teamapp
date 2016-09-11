@@ -1,0 +1,16 @@
+{
+  "name": "teamapp",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": {
+      "version": "1.5.8",
+      "from": "angular@latest",
+      "resolved": "https://registry.npmjs.org/angular/-/angular-1.5.8.tgz"
+    },
+    "font-awesome": {
+      "version": "4.6.3",
+      "from": "font-awesome@latest",
+      "resolved": "https://registry.npmjs.org/font-awesome/-/font-awesome-4.6.3.tgz"
+    }
+  }
+}

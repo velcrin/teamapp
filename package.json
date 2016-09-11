@@ -1,0 +1,22 @@
+{
+  "name": "teamapp",
+  "version": "1.0.0",
+  "description": "The easiest way to organise a sport event",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/velcrin/teamapp.git"
+  },
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "font-awesome": "^4.6.3"
+  }
+}

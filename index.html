@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="teamapp" ng-init="sport = 'football'">
+
+<header class="TeamApp-header Header Header-{{ sport }}">
+    <div class="TeamApp-topbar Topbar">
+        <i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp
+        <a class="Topbar-login" href="./login.html">Login</a>
+    </div>
+
+    <div class="Header-content">
+        <h1 class="Header-title">Envie d'organiser une rencontre sportive?</h1>
+    </div>
+</header>
+
+<main class="TeamApp-body">
+    <h2>Nous sommes là pour ça.</h2>
+    <form class="TeamApp-form">
+        <label class="TeamApp-label" for="sport">Sport</label>
+        <select id="sport" class="TeamApp-input" ng-model="sport">
+            <option value="football">Football</option>
+            <option value="basketball">Basketball</option>
+            <option value="teamSport">Autre</option>
+        </select>
+
+        <label class="TeamApp-label" for="players">Joueurs</label>
+        <input id="players" class="TeamApp-input" type="number">
+
+        <label class="TeamApp-label" for="date">Date</label>
+        <input id="date" class="TeamApp-input" type="datetime">
+
+        <label class="TeamApp-label" for="place">Lieu</label>
+        <input id="place" class="TeamApp-input">
+
+        <button type="submit" class="TeamApp-button">Créer</button>
+    </form>
+</main>
+
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="js/teamapp.module.js"></script>
+</body>
+</html>
