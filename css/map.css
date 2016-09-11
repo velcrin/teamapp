@@ -1,0 +1,72 @@
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 10px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 80%;;
+  top: 40px !important;
+  left: 0 !important;
+  transition: width 2s;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#target {
+  width: 345px;
+}
+
+#map .centerMarker{
+  position:absolute;
+  /*url of the marker*/
+  background:url(../img/marker.png) no-repeat;
+  /*center the marker*/
+  top:50%;left:50%;
+  z-index:1;
+  /*fix offset when needed*/
+  margin-left:-10px;
+  margin-top:-34px;
+  /*size of the image*/
+  height:34px;
+  width:20px;
+  cursor:pointer;
+}
+
+.btn-manual-select {
+  position: relative;
+  z-index: 9;
+  left: 320px;
+  top: 97px;
+}
+
+.btn-submit {
+  position: fixed;
+  z-index: 999;
+  bottom: 10px;
+  left: 50%;
+}

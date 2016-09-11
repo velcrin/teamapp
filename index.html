@@ -5,6 +5,7 @@
 
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-app="teamapp" ng-init="sport = 'football'">
@@ -37,13 +38,22 @@
         <input id="date" class="TeamApp-input" type="datetime">
 
         <label class="TeamApp-label" for="place">Lieu</label>
-        <input id="place" class="TeamApp-input">
-
+        <input id="pac-input" class="TeamApp-input" type="text" placeholder="Search a place, enter an address">
+        <button id="btn" class="btn btn-primary btn-manual-select"><span class="fa fa-map-marker"></span></button>
+        <!--<button id="btn-submit" class="btn btn-primary btn-submit">Create</button>-->
+        
         <button type="submit" class="TeamApp-button">Créer</button>
     </form>
 </main>
+<div id="map"></div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="js/googleMap-callback.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcR6GUg5o-z4o-Ghh9eHqf3rtGWWmPbuk&libraries=places&callback=initAutocomplete"
+         async defer></script>
 
 <script src="node_modules/angular/angular.min.js"></script>
 <script src="js/teamapp.module.js"></script>
+
 </body>
 </html>
