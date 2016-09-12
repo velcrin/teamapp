@@ -22,35 +22,39 @@
 </header>
 
 <main class="TeamApp-body">
-    <h2>Nous sommes là pour ça.</h2>
+    <h2 class="Body-header">Nous sommes là pour ça.</h2>
     <form class="TeamApp-form">
-        <label class="TeamApp-label" for="sport">Sport</label>
-        <select id="sport" class="TeamApp-input" ng-model="sport">
-            <option value="football">Football</option>
-            <option value="basketball">Basketball</option>
-            <option value="teamSport">Autre</option>
-        </select>
+        <div class="TeamApp-fields">
+            <label class="TeamApp-label" for="sport">Sport</label>
+            <select id="sport" class="TeamApp-input" ng-model="sport">
+                <option value="football">Football</option>
+                <option value="basketball">Basketball</option>
+                <option value="teamSport">Autre</option>
+            </select>
 
-        <label class="TeamApp-label" for="players">Joueurs</label>
-        <input id="players" class="TeamApp-input" type="number">
+            <label class="TeamApp-label" for="players">Joueurs</label>
+            <input id="players" class="TeamApp-input" type="number" placeholder="Combien de joueurs sont attendus?">
 
-        <label class="TeamApp-label" for="date">Date</label>
-        <input id="date" class="TeamApp-input" type="datetime">
+            <label class="TeamApp-label" for="date">Date</label>
+            <input id="date" class="TeamApp-input" type="datetime" placeholder="Quand est ce qu'on joue?">
 
-        <label class="TeamApp-label" for="place">Lieu</label>
-        <input id="pac-input" class="TeamApp-input" type="text" placeholder="Search a place, enter an address">
-        <button id="btn" class="btn btn-primary btn-manual-select"><span class="fa fa-map-marker"></span></button>
-        <!--<button id="btn-submit" class="btn btn-primary btn-submit">Create</button>-->
-        
+            <label class="TeamApp-label" for="pac-input">Lieu</label>
+            <input id="pac-input" class="TeamApp-input TeamApp-place" type="text"
+                   placeholder="Où est ce que ça se passe?">
+            <button id="btn" class="btn btn-primary btn-manual-select"><span class="fa fa-map-marker"></span></button>
+        </div>
+        <div id="map"></div>
         <button type="submit" class="TeamApp-button">Créer</button>
     </form>
 </main>
-<div id="map"></div>
+
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="js/googleMap-callback.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcR6GUg5o-z4o-Ghh9eHqf3rtGWWmPbuk&libraries=places&callback=initAutocomplete"
-         async defer></script>
+        async defer></script>
+
+<!--<footer class="TeamApp-footer">Made with ❤ by Fabio & Vincent.</footer>-->
 
 <script src="node_modules/angular/angular.min.js"></script>
 <script src="js/teamapp.module.js"></script>
