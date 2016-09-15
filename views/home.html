@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Teamapp</title>
 
-    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/map.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body ng-app="teamapp" ng-init="sport = 'football'">
+<body ng-app="teamapp" ng-controller="HomeController as home">
 
-<header class="TeamApp-header Header Header-{{ sport }}">
+<header class="TeamApp-header Header Header-{{ home.sport }}">
     <div class="TeamApp-topbar Topbar">
         <i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp
         <a class="Topbar-login" href="./login.html">Login</a>
@@ -28,7 +28,7 @@
     <form class="TeamApp-form">
         <div class="TeamApp-fields">
             <label class="TeamApp-label" for="sport">Sport</label>
-            <select id="sport" class="TeamApp-input" ng-model="sport">
+            <select id="sport" class="TeamApp-input" ng-model="home.sport">
                 <option value="football">Football</option>
                 <option value="basketball">Basketball</option>
                 <option value="teamSport">Autre</option>
@@ -52,14 +52,15 @@
 
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="js/googleMap-callback.js"></script>
+<script src="/js/googleMap-callback.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcR6GUg5o-z4o-Ghh9eHqf3rtGWWmPbuk&libraries=places&callback=initAutocomplete"
         async defer></script>
 
 <!--<footer class="TeamApp-footer">Made with ❤ by Fabio & Vincent.</footer>-->
 
-<script src="node_modules/angular/angular.min.js"></script>
-<script src="js/teamapp.module.js"></script>
+<script src="/node_modules/angular/angular.min.js"></script>
+<script src="/js/teamapp.module.js"></script>
+<script src="/js/home.controller.js"></script>
 
 </body>
 </html>
