@@ -116,6 +116,7 @@ small, .font_small {
     font-size: 1em;
     -webkit-appearance: none;
     -moz-appearance: none;
+    padding: 0;
 }
 
 .TeamApp-label:focus {
