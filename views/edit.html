@@ -15,32 +15,27 @@
 <header class="TeamApp-header Header Header-football">
     <div class="TeamApp-topbar Topbar">
         <i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp
-        <a class="Topbar-login" href="./login.html">Login</a>
     </div>
 
     <div class="Header-content">
-        <h1 class="Header-title">Envie d'organiser une rencontre sportive?</h1>
+        <h1 class="Header-title">Rendez-vous le 14 Oct. à 17h</h1>
+        <a href="<%= id %>/share">Partager</a>
     </div>
 </header>
 
 <main class="TeamApp-body">
-    <h2 class="Body-header">Nous sommes là pour ça.</h2>
-    <form class="TeamApp-form">
-        <div class="TeamApp-fields">
-            <label class="TeamApp-label" for="players">Joueurs</label>
-            <input id="players" class="TeamApp-input" type="number" placeholder="Combien de joueurs sont attendus?">
-
-            <label class="TeamApp-label" for="date">Date</label>
-            <input id="date" class="TeamApp-input" type="datetime" placeholder="Quand est ce qu'on joue?">
-
-            <label class="TeamApp-label" for="pac-input">Lieu</label>
-            <input id="pac-input" class="TeamApp-input TeamApp-place" type="text"
-                   placeholder="Où est ce que ça se passe?">
-            <button id="btn" class="btn btn-primary btn-manual-select"><span class="fa fa-map-marker"></span></button>
-        </div>
-        <div id="map"></div>
-        <button type="submit" class="TeamApp-button">Créer</button>
-    </form>
+    <h2>Joueurs (3/10)</h2>
+    <ul>
+        <li>Thomas</li>
+        <li>Matthieu</li>
+        <li>Vincent</li>
+        <li>Fabio</li>
+        <li><button>+</button></li>
+    </ul>
+    <h2>Lieux</h2>
+    <input id="pac-input" class="TeamApp-input TeamApp-place" type="text"
+           placeholder="Où est ce que ça se passe?">
+    <div id="map"></div>
 </main>
 
 
@@ -48,8 +43,6 @@
 <script src="/js/googleMap-callback.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcR6GUg5o-z4o-Ghh9eHqf3rtGWWmPbuk&libraries=places&callback=initAutocomplete"
         async defer></script>
-
-<!--<footer class="TeamApp-footer">Made with ❤ by Fabio & Vincent.</footer>-->
 
 <script src="/node_modules/angular/angular.min.js"></script>
 <script src="/js/teamapp.module.js"></script>
