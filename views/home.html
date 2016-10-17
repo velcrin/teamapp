@@ -19,23 +19,23 @@
     </div>
 
     <div class="Header-content">
-        <h1 class="Header-title">Envie d'organiser une rencontre sportive?</h1>
+        <h1 class="Header-title">Organisez vos rencontres sportives en toute simplicité.</h1>
     </div>
 </header>
 
 <main class="TeamApp-body">
-    <h2 class="Body-header">Nous sommes là pour ça.</h2>
-    <form class="TeamApp-form">
+    <h2 class="Body-header">Alors, on commence quand?</h2>
+    <form class="TeamApp-form" action="/events" method="post">
         <div class="TeamApp-fields">
-            <label class="TeamApp-label" for="players">Joueurs</label>
-            <input id="players" class="TeamApp-input" type="number" placeholder="Combien de joueurs sont attendus?">
-
             <label class="TeamApp-label" for="date">Date</label>
-            <input id="date" class="TeamApp-input" type="datetime" placeholder="Quand est ce qu'on joue?">
+            <input id="date" name="date" class="TeamApp-input" type="datetime" placeholder="Quand?">
+
+            <label class="TeamApp-label" for="numberOfPlayers">Joueurs</label>
+            <input id="numberOfPlayers" name="numberOfPlayers" class="TeamApp-input" type="number" placeholder="Combien?" value="10">
+
 
             <label class="TeamApp-label" for="pac-input">Lieu</label>
-            <input id="pac-input" class="TeamApp-input TeamApp-place" type="text"
-                   placeholder="Où est ce que ça se passe?">
+            <input id="pac-input" name="place" class="TeamApp-input TeamApp-place" type="text" placeholder="Où?">
             <button id="btn" class="btn btn-primary btn-manual-select"><span class="fa fa-map-marker"></span></button>
         </div>
         <div id="map"></div>
@@ -53,7 +53,6 @@
 
 <script src="/node_modules/angular/angular.min.js"></script>
 <script src="/js/teamapp.module.js"></script>
-<script src="/js/home.controller.js"></script>
 
 </body>
 </html>

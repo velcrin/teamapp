@@ -17,20 +17,21 @@
     </div>
 
     <div class="Header-content">
-        <h1 class="Header-title">Rendez-vous le 14 Oct. à 17h</h1>
+        <h1 class="Header-title">Mes rencontres</h1>
     </div>
 </header>
 
 <main class="TeamApp-body">
+
     <ul>
-        <li><a href="/events/123">Match de foot le 14 Oct. à 17h</a></li>
-        <li><a href="/events/456">Match de foot le 19 Oct. à 21h</a></li>
+        <% Object.keys(events).forEach(function(eventId) { %>
+        <li><a href="/events/<%= eventId %>">Match de foot le <%= events[eventId].date %></a></li>
+        <% }); %>
     </ul>
+
 </main>
 
 <script src="/node_modules/angular/angular.min.js"></script>
 <script src="/js/teamapp.module.js"></script>
-<script src="/js/home.controller.js"></script>
-
 </body>
 </html>
