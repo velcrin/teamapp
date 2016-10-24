@@ -18,7 +18,11 @@
 
     <div class="Header-content">
         <h1 class="Header-title">Rendez-vous le 14 Oct. à 17h</h1>
-        <a href="/events/<%= event.eventId %>">Edit</a>
+
+        <section class="Navigation">
+            <a class="Navigation-item" href="/events/<%= event.eventId %>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+            <a class="Navigation-item" href="/events"><i class="fa fa-list" aria-hidden="true"></i> Mes rencontres</a>
+        </section>
     </div>
 </header>
 

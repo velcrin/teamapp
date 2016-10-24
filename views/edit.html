@@ -19,23 +19,48 @@
 
     <div class="Header-content">
         <h1 class="Header-title">Rendez-vous le 14 Oct. à 17h</h1>
-        <a href="/events/<%= event.eventId %>/share">Partager</a>
+        <section class="Navigation">
+            <a class="Navigation-item" href="/events/<%= event.eventId %>/share"><i class="fa fa-share-alt" aria-hidden="true"></i> Partager</a>
+            <a class="Navigation-item" href="/events"><i class="fa fa-list" aria-hidden="true"></i> Mes rencontres</a>
+        </section>
     </div>
 </header>
 
 <main class="TeamApp-body">
-    <h2>Joueurs (3/10)</h2>
-    <ul>
-        <li>Thomas</li>
-        <li>Matthieu</li>
-        <li>Vincent</li>
-        <li>Fabio</li>
-        <li><button>+</button></li>
-    </ul>
-    <h2>Lieux</h2>
-    <input id="pac-input" class="TeamApp-input TeamApp-place" type="text"
-           placeholder="Où est ce que ça se passe?">
+    <section class="Players">
+        <h2>Joueurs (3/10)</h2>
+        <ul class="PlayerList">
+            <li class="PlayerList-item">
+                <figure>
+                    <img class="PlayerList-avatar" src="../img/player1.png" alt="Thomas">
+                    <figcaption class="PlayerList-caption">Thomas</figcaption>
+                </figure>
+            </li>
+            <li class="PlayerList-item">
+                <figure>
+                    <img class="PlayerList-avatar" src="../img/player2.png" alt="Vincent">
+                    <figcaption class="PlayerList-caption">Vincent</figcaption>
+                </figure>
+            </li>
+            <li class="PlayerList-item">
+                <figure>
+                    <img class="PlayerList-avatar" src="../img/player3.png" alt="Fabio">
+                    <figcaption class="PlayerList-caption">Fabio</figcaption>
+                </figure>
+            </li>
+            <li class="PlayerList-item">
+                <button class="PlayerList-new">+</button>
+            </li>
+        </ul>
+    </section>
+    <section class="Place">
+        <h2>Lieux</h2>
+        <input id="pac-input" class="TeamApp-input TeamApp-place" type="text"
+               placeholder="Où est ce que ça se passe?">
+        </div>
+    </section>
     <div id="map"></div>
+
 </main>
 
 

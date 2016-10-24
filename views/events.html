@@ -22,13 +22,11 @@
 </header>
 
 <main class="TeamApp-body">
-
-    <ul>
+    <ul class="MatchList">
         <% Object.keys(events).forEach(function(eventId) { %>
-        <li><a href="/events/<%= eventId %>">Match de foot le <%= events[eventId].date %></a></li>
+        <li class="MatchList-item"><a href="/events/<%= eventId %>">Match de foot le <%= JSON.stringify(events[eventId]) %></a></li>
         <% }); %>
     </ul>
-
 </main>
 
 <script src="/node_modules/angular/angular.min.js"></script>
