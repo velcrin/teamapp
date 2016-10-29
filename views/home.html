@@ -12,7 +12,7 @@
 </head>
 <body ng-app="teamapp">
 
-<header class="TeamApp-header Header Header-football">
+<header class="TeamApp-header Header Header-image">
     <div class="TeamApp-topbar Topbar">
         <i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp
         <a class="Topbar-login" href="./login.html">Login</a>
@@ -31,25 +31,25 @@
             <input id="date" name="date" class="TeamApp-input" type="datetime" placeholder="Quand?">
 
             <label class="TeamApp-label" for="numberOfPlayers">Joueurs</label>
-            <input id="numberOfPlayers" name="numberOfPlayers" class="TeamApp-input" type="number" placeholder="Combien?" value="10">
+            <input id="numberOfPlayers" name="numberOfPlayers" class="TeamApp-input" type="number"
+                   placeholder="Combien?" value="10">
 
 
             <label class="TeamApp-label" for="pac-input">Lieu</label>
             <input id="pac-input" name="place" class="TeamApp-input TeamApp-place" type="text" placeholder="Où?">
-            <button id="btn" class="btn btn-primary btn-manual-select"><span class="fa fa-map-marker"></span></button>
+
+            <div class="Map" id="map"></div>
+            <button type="submit" class="TeamApp-button">Créer</button>
         </div>
-        <div id="map"></div>
-        <button type="submit" class="TeamApp-button">Créer</button>
     </form>
 </main>
-
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="/js/googleMap-callback.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcR6GUg5o-z4o-Ghh9eHqf3rtGWWmPbuk&libraries=places&callback=initAutocomplete"
         async defer></script>
 
-<!--<footer class="TeamApp-footer">Made with ❤ by Fabio & Vincent.</footer>-->
+<footer class="TeamApp-footer">Made with ❤ by Fabio & Vincent.</footer>
 
 <script src="/node_modules/angular/angular.min.js"></script>
 <script src="/js/teamapp.module.js"></script>

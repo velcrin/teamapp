@@ -25,11 +25,11 @@ h1, h2 {
 }
 
 h1 {
-    font-size: 2.618em;
+    font-size: 1.8rem;
 }
 
 h2 {
-    font-size: 1.618em;
+    font-size: 1.2rem;
 }
 
 small, .font_small {
@@ -39,9 +39,9 @@ small, .font_small {
 .TeamApp-header {
     position: relative;
     color: #fff;
-    background: no-repeat top center;
+    background: no-repeat center;
     background-size: cover;
-    height: 70vh;
+    height: 40vh;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
 }
 
@@ -78,25 +78,8 @@ small, .font_small {
     right: .2em;
 }
 
-.Header-football {
+.Header-image {
     background-image: url('../img/soccer.jpg');
-}
-
-.Header-basketball {
-    background-image: url('../img/basketball.png');
-}
-
-.Header-teamSport {
-    background-image: url('../img/tug-of-war.jpg');
-}
-
-.Header-content {
-    position: relative;
-    height: 100%;
-}
-
-.Header-content, .TeamApp-body {
-    margin: 0 auto;
 }
 
 .Header-title {
@@ -109,6 +92,8 @@ small, .font_small {
 .TeamApp-body {
     color: dimgrey;
     margin: 0 auto;
+    max-width: 700px;
+    padding: 0 1em;
 }
 
 .TeamApp-label {
@@ -139,23 +124,8 @@ small, .font_small {
     border-bottom-color: #03A9F4;
 }
 
-.TeamApp-form {
-    position: relative;
-}
-
-.Body-header, .TeamApp-fields {
-    max-width: 780px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 1em;
-}
-
 .TeamApp-button {
-    position: absolute;
-    bottom: 1.5em;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
+    width: 100%;
     padding: .5em 1.2em;
     border: none;
     border-radius: 3px;
@@ -165,11 +135,12 @@ small, .font_small {
     box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
     background: #4BA398;
     color: #fff;
+    margin-bottom: 2em;
 }
 
 .TeamApp-footer {
     width: 100%;
-    margin: 1em 0;
+    margin-bottom: 1em;
     border-top: solid 1px #eee;
     padding-top: 1em;
     text-align: center;
@@ -177,14 +148,8 @@ small, .font_small {
     font-size: .8em;
 }
 
-.MatchList, .Players, .Place {
-    max-width: 780px;
-    margin: 3em auto;
-    padding: 0 1em;
-}
-
 .MatchList-item:not(:last-child) {
-    border-bottom: 1px solid #9e9e9e;
+    border-bottom: 1px solid #ddd;
 }
 
 .MatchList-item a {
@@ -192,7 +157,7 @@ small, .font_small {
     height: 100%;
     width: 100%;
     padding: 1em;
-    font-size: 1.4em;
+    font-size: 1em;
     text-decoration: none;
     color: #333;
     cursor: pointer;
@@ -222,4 +187,12 @@ small, .font_small {
     border-radius: 100%;
     border: none;
     background: lightgray;
+}
+
+.Map {
+    height: 40vh;
+    width: 100%;
+    margin-bottom: 2em;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
 }
