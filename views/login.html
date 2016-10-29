@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Teamapp</title>
+
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body ng-app="teamapp" ng-controller="LoginController as login">
+
+<header class="TeamApp-header Header Header-football">
+    <div class="TeamApp-topbar Topbar">
+        <i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp
+    </div>
+
+    <div class="Header-content">
+        <h1 class="Header-title">Login with facebook</h1>
+    </div>
+</header>
+
+<main class="TeamApp-body">
+  <!--<div id="fb-root"></div>
+    <h2 class="Body-header" ng-if="!user">Please log-in</h2>
+    <h2 class="Body-header" ng-if="user">Welcome <img src="{{user.picture.data.url}}" style="border-radius: 50px;"> {{user.name}} </h2>
+    <form class="TeamApp-form">
+        <div class="TeamApp-fields">
+            <button type="submit" class="TeamApp-button" style="position:initial;" ng-click="login()">Login</button>
+        <div>
+    </form>-->
+    <h2 class="Body-header">Please log-in</h2>
+    <div class="TeamApp-fields">
+        <a class="TeamApp-button" style="position:initial;" href="/login/facebook">Login</a>
+    <div>
+</main>
+
+<!--<footer class="TeamApp-footer">Made with ❤ by Fabio & Vincent.</footer>-->
+
+<script src="/node_modules/angular/angular.min.js"></script>
+<script src="/js/teamapp.module.js"></script>
+<!--<script src="/js/login.controller.js"></script>-->
+
+
+<!--<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '205751546505611',
+      xfbml      : true,
+      version    : 'v2.7'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>-->
+
+</body>
+</html>
