@@ -64,9 +64,9 @@ app.use(passport.session());
 
 const events = {};
 
-app.get('/', (req, res) => res.render('home'));
+app.get('/', (req, res) => res.render('home', { user: req.user }));
 
-app.get('/login', (req, res) => res.render('login'));
+app.get('/login', (req, res) => res.render('login', { user: req.user }));
 
 app.get('/login/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email'] }));
 
@@ -74,8 +74,8 @@ app.get('/login/facebook/return', passport.authenticate('facebook', { failureRed
 
 //app.get('/events', (req, res) => res.render('events', { events }));
 app.get('/events', require('connect-ensure-login').ensureLoggedIn(), (req, res) => res.render('events', { user: req.user, events }));
-app.get('/events/:id', (req, res) => res.render('edit', { event: events[req.params.id] }));
-app.get('/events/:id/share', (req, res) => res.render('share', { event: events[req.params.id] }));
+app.get('/events/:id', require('connect-ensure-login').ensureLoggedIn(), (req, res) => res.render('edit', { user: req.user, event: events[req.params.id] }));
+app.get('/events/:id/share', require('connect-ensure-login').ensureLoggedIn(), (req, res) => res.render('share', { user: req.user, event: events[req.params.id] }));
 app.post('/events', (req, res) => {
   const eventId = UUID.create();
   events[eventId] = Object.assign({ eventId }, req.body);

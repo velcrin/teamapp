@@ -15,6 +15,9 @@
 <header class="TeamApp-header Header Header-image">
     <div class="TeamApp-topbar Topbar">
         <span><i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp</span>
+        <% if (user && user.photos) { %>
+          <span style="float: right;"><img src=<%= user.photos[0].value %> style="border-radius: 50px;"><span>
+        <% } %>
     </div>
 
     <div class="Header-content">

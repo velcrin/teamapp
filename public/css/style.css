@@ -69,7 +69,8 @@ small, .font_small {
     font-size: .8em;
     padding: .8em;
     text-decoration: none;
-    border: 1px solid #fff;
+    background-color: #4BA398;
+    border: 1px solid #4BA398;
     border-radius: 3px;
     color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .5);

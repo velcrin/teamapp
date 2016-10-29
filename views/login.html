@@ -12,9 +12,12 @@
 </head>
 <body ng-app="teamapp">
 
-<header class="TeamApp-header Header Header-football">
+<header class="TeamApp-header Header Header-image">
     <div class="TeamApp-topbar Topbar">
         <i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp
+        <% if (user && user.photos) { %>
+          <span style="float: right;"><img src=<%= user.photos[0].value %> style="border-radius: 50px;"><span>
+        <% } %>
     </div>
 
     <div class="Header-content">

@@ -15,11 +15,21 @@
 <header class="TeamApp-header Header Header-image">
     <div class="TeamApp-topbar Topbar">
         <span><i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp</span>
-        <a class="Topbar-login" href="login.html">Login</a>
+        <% if (user && user.photos) { %>
+          <span style="float: right;"><img src=<%= user.photos[0].value %> style="border-radius: 50px;"><span>
+        <% } else { %>
+          <a class="Topbar-login" href="/login">Login</a>
+        <% } %>
     </div>
 
     <div class="Header-content">
         <h1 class="Header-title">Organisez vos rencontres sportives en toute simplicité.</h1>
+
+        <% if (user) { %>
+          <section class="Navigation">
+            <a class="Navigation-item" href="/events"><i class="fa fa-list" aria-hidden="true"></i> Mes rencontres</a>
+          </section>
+        <% } %>
     </div>
 </header>
 

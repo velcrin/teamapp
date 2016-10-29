@@ -14,21 +14,22 @@
 <header class="TeamApp-header Header Header-image">
     <div class="TeamApp-topbar Topbar">
         <span><i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp</span>
+        <span style="float: right;"><img src="https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13882404_10210001863865656_4590096902238835286_n.jpg?oh=4853a2515dc82a84dd5b774be61c0695&amp;oe=58D2AE7E" style="border-radius: 50px;"><span>
     </div>
 
     <div class="Header-content">
         <h1 class="Header-title">Mes rencontres</h1>
+
+        <section class="Navigation">
+            <a class="Navigation-item" href="/"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Créer une rencontre</a>
+        </section>
     </div>
 </header>
 
 <main class="TeamApp-body">
-  <p>
-Welcome <%= user.displayName %>
-<% if (user.photos) { %>
-<img src=<%= user.photos[0].value %> style="border-radius: 50px;">
-<% } %>
-<!-- <%= JSON.stringify(user) %> -->
-</p>
+<!--  <p>
+ <%= JSON.stringify(user) %>
+</p> -->
     <ul class="MatchList">
         <% Object.keys(events).forEach(function(eventId) { %>
         <li class="MatchList-item"><a href="/events/<%= eventId %>">Match de foot le <%= JSON.stringify(events[eventId]) %></a></li>
