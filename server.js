@@ -18,7 +18,8 @@ const app = express();
 passport.use(new Strategy({
     clientID: '205751546505611',
     clientSecret: 'e78708edd0c07fc11dcca84010cfc433',
-    callbackURL: 'http://localhost:3000/login/facebook/return'
+    callbackURL: 'http://localhost:3000/login/facebook/return',
+    profileFields: ['id', 'displayName', 'email', 'picture', 'friends']
   },
   function(accessToken, refreshToken, profile, cb) {
     // In this example, the user's Facebook profile is supplied as the user
@@ -67,7 +68,7 @@ app.get('/', (req, res) => res.render('home'));
 
 app.get('/login', (req, res) => res.render('login'));
 
-app.get('/login/facebook', passport.authenticate('facebook'));
+app.get('/login/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email'] }));
 
 app.get('/login/facebook/return', passport.authenticate('facebook', { failureRedirect: '/login/facebook' }), (req, res) => res.redirect('/events'));
 
