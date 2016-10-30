@@ -17,7 +17,7 @@ function initAutocomplete() {
   });
 
   // Create the search box and link it to the UI element.
-  var input = document.getElementById('pac-input');
+  var input = document.getElementById('place');
   var searchBox = new google.maps.places.SearchBox(input);
 
   // Bias the SearchBox results towards current map's viewport.
@@ -81,7 +81,7 @@ function initAutocomplete() {
   var btn = document.querySelector('#btn');
   btn.addEventListener('click', function () {
     manuallySelect = true;
-    $('#pac-input').val('');
+    $('#place').val('');
     // Clear out the old markers.
     markers.forEach(function(marker) {
       marker.setMap(null);

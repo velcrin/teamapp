@@ -14,7 +14,7 @@
 
 <header class="TeamApp-header Header Header-image">
     <div class="TeamApp-topbar Topbar">
-        <i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp
+        <span><i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp</span>
         <a class="Topbar-login" href="./login.html">Login</a>
     </div>
 
@@ -23,23 +23,43 @@
     </div>
 </header>
 
-<main class="TeamApp-body">
+<main class="TeamApp-body" ng-controller="HomeController as home">
     <h2 class="Body-header">Alors, on commence quand?</h2>
-    <form class="TeamApp-form" action="/events" method="post">
+    <form class="TeamApp-form" name="form" novalidate action="/events" method="post">
         <div class="TeamApp-fields">
             <label class="TeamApp-label" for="date">Date</label>
-            <input id="date" name="date" class="TeamApp-input" type="datetime" placeholder="Quand?">
+            <input id="date"
+                   name="date"
+                   class="TeamApp-input"
+                   type="date"
+                   placeholder="Quand?"
+                   ng-model="home.event.date"
+                   required>
 
             <label class="TeamApp-label" for="numberOfPlayers">Joueurs</label>
-            <input id="numberOfPlayers" name="numberOfPlayers" class="TeamApp-input" type="number"
-                   placeholder="Combien?" value="10">
+            <input id="numberOfPlayers"
+                   name="numberOfPlayers"
+                   class="TeamApp-input"
+                   type="number"
+                   placeholder="Combien?"
+                   value="10"
+                   ng-model="home.event.numberOfPlayers"
+                   required>
 
-
-            <label class="TeamApp-label" for="pac-input">Lieu</label>
-            <input id="pac-input" name="place" class="TeamApp-input TeamApp-place" type="text" placeholder="Où?">
-
+            <label class="TeamApp-label" for="place">Lieu</label>
+            <input id="place"
+                   name="place"
+                   class="TeamApp-input TeamApp-place"
+                   type="text"
+                   placeholder="Où?"
+                   ng-model="home.event.place">
             <div class="Map" id="map"></div>
-            <button type="submit" class="TeamApp-button">Créer</button>
+
+            <button type="submit"
+                    class="TeamApp-button"
+                    ng-disabled="form.$invalid">
+                Créer
+            </button>
         </div>
     </form>
 </main>
@@ -53,6 +73,7 @@
 
 <script src="/node_modules/angular/angular.min.js"></script>
 <script src="/js/teamapp.module.js"></script>
+<script src="/js/home.controller.js"></script>
 
 </body>
 </html>
