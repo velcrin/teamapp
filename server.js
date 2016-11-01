@@ -74,8 +74,9 @@ app.get('/login/facebook/return', passport.authenticate('facebook', { failureRed
 
 //app.get('/events', (req, res) => res.render('events', { events }));
 app.get('/events', require('connect-ensure-login').ensureLoggedIn(), (req, res) => res.render('events', { user: req.user, events }));
-app.get('/events/:id', require('connect-ensure-login').ensureLoggedIn(), (req, res) => res.render('edit', { user: req.user, event: events[req.params.id] }));
-app.get('/events/:id/share', require('connect-ensure-login').ensureLoggedIn(), (req, res) => res.render('share', { user: req.user, event: events[req.params.id] }));
+app.all('/events/*', require('connect-ensure-login').ensureLoggedIn(), (req, res, next) => next());
+app.get('/events/:id', (req, res) => res.render('edit', { user: req.user, event: events[req.params.id] }));
+app.get('/events/:id/share', (req, res) => res.render('share', { user: req.user, event: events[req.params.id] }));
 app.post('/events', (req, res) => {
   const eventId = UUID.create();
   events[eventId] = Object.assign({ eventId }, req.body);
