@@ -59,17 +59,20 @@ small, .font_small {
     left: 0;
     right: 0;
     padding: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-shadow: 1px 1px 1px #000;
 }
 
 .Topbar-login, .Navigation-item {
-    margin: .5em;
-    float: right;
     font-size: .8em;
-    padding: .5em;
+    padding: .8em;
     text-decoration: none;
     border: 1px solid #fff;
     border-radius: 3px;
     color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
 }
 
 .Navigation {
@@ -136,6 +139,17 @@ small, .font_small {
     background: #4BA398;
     color: #fff;
     margin-bottom: 2em;
+    position: relative;
+}
+
+.TeamApp-button:disabled:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(240, 240, 240, 0.5);
 }
 
 .TeamApp-footer {
