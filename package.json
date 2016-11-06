@@ -4,7 +4,7 @@
   "description": "The easiest way to organise a sport event",
   "main": "index.html",
   "scripts": {
-    "start": "node server.js"
+    "start": "ts-node --compilerOptions '{\"target\":\"es6\"}' server.ts"
   },
   "author": "",
   "license": "ISC",
@@ -12,21 +12,21 @@
     "type": "git",
     "url": "git://github.com/velcrin/teamapp.git"
   },
-  "devDependencies": {
-    "http-server": "^0.9.0"
-  },
   "dependencies": {
+    "@types/node": "^6.0.46",
     "angular": "^1.5.8",
     "body-parser": "^1.15.2",
-    "ejs": "^2.5.2",
-    "express": "^4.14.0",
-    "font-awesome": "^4.6.3",
-    "uuid-js": "^0.7.5",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.3.5",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
     "express-session": "^1.11.3",
+    "font-awesome": "^4.6.3",
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
-    "passport-facebook": "^2.0.0"
+    "passport-facebook": "^2.0.0",
+    "ts-node": "^1.6.1",
+    "typescript": "^2.0.7",
+    "uuid-js": "^0.7.5"
   }
 }
