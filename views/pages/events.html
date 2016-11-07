@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<% include ../partials/head %>
+<body ng-app="teamapp">
+
+<header class="TeamApp-header Header Header-image">
+    <div class="TeamApp-topbar Topbar">
+        <span><i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp</span>
+    </div>
+
+    <div class="Header-content">
+        <h1 class="Header-title">Mes rencontres</h1>
+    </div>
+</header>
+<main class="TeamApp-body">
+    <section class="Navigation">
+        <a class="Navigation-item" href="/">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Créer une rencontre
+        </a>
+    </section>
+    <section>
+        <ul class="MatchList">
+            <% events.forEach(function(event) { %>
+            <li class="MatchList-item Match">
+                <a href="/events/<%= event.id %>">
+                    <span class="Match-title"><%= event.title %></span> <%= event.date %>
+                </a>
+            </li>
+            <% }); %>
+        </ul>
+    </section>
+</main>
+<% include ../partials/scripts %>
+</body>
+</html>

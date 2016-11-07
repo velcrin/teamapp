@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<% include ../partials/head %>
+<body ng-app="teamapp">
+
+<header class="TeamApp-header Header Header-image">
+    <div class="TeamApp-topbar Topbar">
+        <span><i class="fa fa-futbol-o" aria-hidden="true"></i> TeamApp</span>
+    </div>
+
+    <div class="Header-content">
+        <h1 class="Header-title"><%= title %> le <%= date %></h1>
+    </div>
+</header>
+
+<main class="TeamApp-body">
+    <section>
+        Cette rencontre est organisée par
+        <figure>
+            <img class="Avatar" src="<%= organiser.avatar %>">
+            <caption><%= organiser.name %></caption>
+        </figure>
+    </section>
+    <button>Participer</button>
+</main>
+<% include ../partials/scripts %>
+</body>
+</html>
