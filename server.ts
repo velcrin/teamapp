@@ -7,9 +7,10 @@ const UUID = require('uuid-js');
 const Strategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
-const app = express();
+const {ensureLoggedIn} = require('connect-ensure-login');
 
-let users = {};
+const app = express();
+const users = {};
 moment.locale('fr');
 
 function createUser(profile) {
@@ -76,10 +77,27 @@ app.use(expressSession({secret: 'keyboard cat', resave: true, saveUninitialized:
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/login', (req, res) => res.render('pages/login', {user: req.user}));
+app.get('/login', (req, res) => res.render('pages/login'));
 app.get('/login/facebook', passport.authenticate('facebook', {scope: ['user_friends', 'email']}));
-app.get('/login/facebook/return', passport.authenticate('facebook', {failureRedirect: '/login/facebook'}), (req, res) => res.redirect('/events'));
-app.all('/events*', require('connect-ensure-login').ensureLoggedIn(), (req, res, next) => next());
+app.get('/login/facebook/return', passport.authenticate('facebook', {failureRedirect: '/login/facebook'}), (req, res) => {
+  if(req.session.event) {
+    const eventId = createEvent(req.user, req.session.event);
+    delete req.session.event;
+    return res.redirect(`/events/${eventId}/share`);
+  }
+  res.redirect('/events');
+});
+app.get('/events*', ensureLoggedIn());
+app.post('/events', (req, res, next) => {
+  if(isEvent(req.body)) {
+    req.session.event = req.body;
+  }
+  return ensureLoggedIn()(req, res, next);
+});
+
+function isEvent(object) {
+  return JSON.stringify(Object.keys(object)) === JSON.stringify(['date', 'numberOfPlayersNeeded', 'place']);
+}
 
 function values(object: Object): Array<any> {
   return Object.keys(object).map((key) => object[key]);
@@ -130,11 +148,16 @@ app.get('/events/:id/share', (req, res) => {
   });
 });
 app.post('/events', (req, res) => {
-  const eventId = createUUID();
-  req.user.events[eventId] = Object.assign({eventId, players: [req.user.id]}, req.body);
-  users[req.user.id] = req.user;
+  const eventId = createEvent(req.user, req.body);
   res.redirect(`/events/${eventId}/share`);
 });
+
+function createEvent(user, event) {
+  const eventId = createUUID();
+  user.events[eventId] = Object.assign({eventId, players: [user.id]}, event);
+  users[user.id] = user;
+  return eventId;
+}
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
