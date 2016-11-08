@@ -9,7 +9,8 @@
     </div>
 
     <div class="Header-content">
-        <h1 class="Header-title"><%= title %> le <%= date %></h1>
+        <h1 class="Header-title"><%= title %></h1>
+        <p class="Header-date"><%= date %></p>
     </div>
 </header>
 
@@ -24,10 +25,13 @@
     </section>
     <section>
         <h2>Link</h2>
-        <a href="<%= link %>"><%= link %></a>
+        <a class="Share-link" href="<%= link %>"><i class="fa fa-external-link" aria-hidden="true"></i> <%= link %></a>
     </section>
     <section>
         <h2>Facebook</h2>
+        <form action="/events/<%= eventId %>/share" method="post">
+            <button class="Share-facebook" type="submit">Poster sur ma Timeline</button>
+        </form>
     </section>
 </main>
 <% include ../partials/scripts %>

@@ -18,6 +18,10 @@ p {
     margin-bottom: 1.3em;
 }
 
+strong {
+    font-weight: 600;
+}
+
 h1, h2 {
     margin: 1.414em 0 0.5em;
     font-weight: inherit;
@@ -50,7 +54,7 @@ small, .font_small {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .5);
 }
 
 .TeamApp-topbar {
@@ -95,11 +99,19 @@ small, .font_small {
     background-image: url('../img/soccer.jpg');
 }
 
-.Header-title {
+.Header-content {
     position: absolute;
-    bottom: .2em;
-    left: .2em;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: .2em;
+    width: 100%;
+    text-align: center;
     text-shadow: 1px 1px 1px #000;
+    font-size: 1.4rem;
+}
+
+.Header-title, .Header-date {
+    margin: 0;
 }
 
 .TeamApp-body {
@@ -137,7 +149,7 @@ small, .font_small {
     border-bottom-color: #03A9F4;
 }
 
-.TeamApp-button {
+.TeamApp-button, .Invite-participate, .Share-facebook {
     width: 100%;
     padding: .5em 1.2em;
     border: none;
@@ -185,7 +197,6 @@ small, .font_small {
     text-decoration: none;
     color: #999;
     cursor: pointer;
-
     text-align: center;
 }
 
@@ -234,4 +245,63 @@ small, .font_small {
     border: 2px solid #2c4359;
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+
+.Invite {
+    text-align: center;
+    padding: 2em 0 0 0;
+    font-size: 1.2em;
+}
+
+.Invite p {
+    margin: 0 0 .4em;
+}
+
+.Invite-organizer {
+    margin: 1em;
+}
+
+.Invite-participate {
+    margin-top: .8em;
+}
+
+.Invite-participate--cancel {
+    background-color: #d64c4c;
+}
+
+.Facebook-image {
+    max-width: 210px;
+}
+
+.Presentation {
+    margin: 1em 0;
+    font-size: 1.2rem;
+}
+
+.Share-link {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 2em;
+    border: 1px solid #ddd;
+    background: #eee;
+    white-space: nowrap;
+    display: block;
+    text-decoration: none;
+    color: #666;
+    padding: .3em .6em;
+    border-radius: 3px;
+}
+
+.Share-link .fa {
+    transform: translateY(10%);
+    margin: 0 .2em;
+}
+
+.Share-link:hover {
+    background: #ddd;
+}
+
+.Share-facebook {
+    background: #3B5998;
 }

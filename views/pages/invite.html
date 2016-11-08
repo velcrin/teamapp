@@ -9,20 +9,43 @@
     </div>
 
     <div class="Header-content">
-        <h1 class="Header-title"><%= title %> le <%= date %></h1>
+        <h1 class="Header-title"><%= title %></h1>
+        <p class="Header-date"><%= date %></p>
     </div>
 </header>
 
 <main class="TeamApp-body">
-    <section>
-        Cette rencontre est organisée par
-        <figure>
+    <section class="Invite">
+        <p>Cette rencontre est organisée par</p>
+        <figure class="Invite-organizer">
             <img class="Avatar" src="<%= organiser.avatar %>">
-            <caption><%= organiser.name %></caption>
+            <figcaption><%= organiser.name %></figcaption>
         </figure>
+        <% if(isPlayer) { %>
+        <p>Tu fais déjà parti(e) de la team.</p>
+        <% } %>
+        <% if(isFull) { %>
+        <p>On est au complet. Bon match!</p>
+        <% } else { %>
+        <p>Il nous manque encore <strong><%= numberOfSpotLeft %> joueurs</strong>!</p>
+        <% } %>
+        <% if(!isConnected) { %>
+        <p>Mais pour enregistrer ta participation on aurait besoin que tu te connectes</p>
+        <a href="/login/facebook"><img class="Facebook-image" src="../img/loginFacebook.svg"></a>
+        <% } else { %>
+        <form action="/invite/<%= eventId %>" method="post">
+            <% if(isPlayer) { %>
+            <input type="hidden" name="response" value="cancel">
+            <button class="Invite-participate Invite-participate--cancel">Annuler</button>
+            <% } else { %>
+            <input type="hidden" name="response" value="participate">
+            <button class="Invite-participate">Participer</button>
+            <% } %>
+        </form>
+        <% } %>
     </section>
-    <button>Participer</button>
 </main>
+<footer class="TeamApp-footer">Made with ❤ by Fabio & Vincent.</footer>
 <% include ../partials/scripts %>
 </body>
 </html>

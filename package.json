@@ -13,6 +13,8 @@
     "url": "git://github.com/velcrin/teamapp.git"
   },
   "dependencies": {
+    "@types/fb": "^0.0.21",
+    "@types/lodash": "^4.14.38",
     "@types/node": "^6.0.46",
     "@types/passport": "^0.2.34",
     "angular": "^1.5.8",
@@ -22,7 +24,9 @@
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-session": "^1.11.3",
+    "fb": "^1.1.1",
     "font-awesome": "^4.6.3",
+    "lodash": "^4.16.6",
     "moment": "^2.15.2",
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
