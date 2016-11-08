@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "The easiest way to organise a sport event",
   "main": "index.html",
+  "engines": {
+    "node": "6.x"
+  },
   "scripts": {
     "start": "ts-node --compilerOptions '{\"target\":\"es6\"}' server.ts"
   },
