@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const {ensureLoggedIn} = require('connect-ensure-login');
 
+const HOSTNAME = process.env.HOSTNAME || 'http://localhost:3000/';
 const app = express();
 app.set('port', (process.env.PORT || 3000));
 const users = {};
@@ -40,7 +41,7 @@ function createUUID() {
 passport.use(new Strategy({
     clientID: '205751546505611',
     clientSecret: 'e78708edd0c07fc11dcca84010cfc433',
-    callbackURL: 'http://localhost:3000/login/facebook/return',
+    callbackURL: `${HOSTNAME}login/facebook/return`,
     profileFields: ['id', 'first_name', 'picture']
   },
   function (accessToken, refreshToken, profile, cb) {
@@ -194,15 +195,16 @@ app.get('/events/:id/share', (req, res) => {
 app.post('/events/:id/share', (req, res) => {
   FB.setAccessToken(users[req.user.id].facebookAccessToken);
   const event = findEvent(req.params.id);
-  const invite = `http://go.teamapp.com/invite/${event.eventId}`;
   const post = {
     message: `J'organise un match de foot le ${moment(event.date).format('LL')} et il manque ${event.numberOfPlayersNeeded - event.players.length} joueurs. 
     J'ai créé un évenement sur teamapp. N'hésitez pas à vous inscrire!`,
-    link: `http://go.teamapp.fr/invite/${event.eventId}`
+    link: `${HOSTNAME}/invite/${event.eventId}`
   };
+
   function redirect() {
     res.redirect(`/events/${event.eventId}/share`);
   }
+
   FB.api('me/feed', 'post', post, res => {
     if (!res || res.error) {
       console.log(!res ? 'error occurred' : res.error);
