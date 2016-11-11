@@ -1,6 +1,7 @@
 import * as passport from 'passport';
 import * as moment from 'moment';
 import {without} from 'lodash';
+import env from './lib/env/environment';
 
 const FB = require('fb');
 const express = require('express');
@@ -11,7 +12,7 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const {ensureLoggedIn} = require('connect-ensure-login');
 
-const HOSTNAME = process.env.HOSTNAME || 'http://localhost:3000/';
+const hostname = env.get('hostname') || 'http://localhost:3000/';
 const app = express();
 app.set('port', (process.env.PORT || 3000));
 const users = {};
@@ -39,9 +40,9 @@ function createUUID() {
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
 passport.use(new Strategy({
-    clientID: '205751546505611',
-    clientSecret: 'e78708edd0c07fc11dcca84010cfc433',
-    callbackURL: `${HOSTNAME}login/facebook/return`,
+    clientID: env.get('facebook:clientId'),
+    clientSecret: env.get('facebook:clientSecret'),
+    callbackURL: `${hostname}login/facebook/return`,
     profileFields: ['id', 'first_name', 'picture']
   },
   function (accessToken, refreshToken, profile, cb) {
@@ -198,7 +199,7 @@ app.post('/events/:id/share', (req, res) => {
   const post = {
     message: `J'organise un match de foot le ${moment(event.date).format('LL')} et il manque ${event.numberOfPlayersNeeded - event.players.length} joueurs. 
     J'ai créé un évenement sur teamapp. N'hésitez pas à vous inscrire!`,
-    link: `${HOSTNAME}/invite/${event.eventId}`
+    link: `${hostname}/invite/${event.eventId}`
   };
 
   function redirect() {

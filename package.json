@@ -7,7 +7,7 @@
     "node": "6.x"
   },
   "scripts": {
-    "start": "ts-node --compilerOptions '{\"target\":\"es6\"}' server.ts"
+    "start": "ts-node --compilerOptions '{\"target\":\"es6\",\"module\":\"commonjs\"}' server.ts"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +18,7 @@
   "dependencies": {
     "@types/fb": "^0.0.21",
     "@types/lodash": "^4.14.38",
+    "@types/nconf": "^0.0.32",
     "@types/node": "^6.0.46",
     "@types/passport": "^0.2.34",
     "angular": "^1.5.8",
@@ -32,6 +33,7 @@
     "lodash": "^4.16.6",
     "moment": "^2.15.2",
     "morgan": "^1.6.1",
+    "nconf": "^0.8.4",
     "passport": "^0.2.2",
     "passport-facebook": "^2.0.0",
     "ts-node": "^1.6.1",
