@@ -1,9 +1,19 @@
 import * as passport from 'passport';
 import * as moment from 'moment';
 import env from './lib/env/environment';
-import UserRepository from './lib/repositories/UserRepository';
-import EventRepository from './lib/repositories/EventRepository';
 import {find} from 'lodash';
+
+import mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/teamapp');
+import UserRepository from './lib/repositories/UserRepository';
+import {
+  createEvent,
+  findEventById,
+  findUserEvents,
+  participateToEvent,
+  withdrawFromEvent
+} from './lib/repositories/EventRepository';
 
 const FB = require('fb');
 const express = require('express');
@@ -14,7 +24,6 @@ const expressSession = require('express-session');
 const {ensureLoggedIn} = require('connect-ensure-login');
 
 const userRepository = new UserRepository();
-const eventRepository = new EventRepository();
 
 const hostname = env.get('hostname') || 'http://localhost:3000';
 const app = express();
@@ -72,9 +81,9 @@ app.use(passport.session());
 
 app.get('/login', (req, res) => res.render('pages/login'));
 app.get('/login/facebook', passport.authenticate('facebook', {scope: ['publish_actions']}));
-app.get('/login/facebook/return', passport.authenticate('facebook', {failureRedirect: '/login/facebook'}), (req, res) => {
+app.get('/login/facebook/return', passport.authenticate('facebook', {failureRedirect: '/login/facebook'}), async(req, res) => {
   if (req.session.event) {
-    const event = eventRepository.createEvent(
+    const event = await createEvent(
       userRepository.findUser({id: req.user.id}),
       req.session.event.numberOfPlayersNeeded,
       req.session.event.date,
@@ -101,8 +110,8 @@ function isEvent(object) {
   return JSON.stringify(Object.keys(object)) === JSON.stringify(['date', 'numberOfPlayersNeeded', 'place']);
 }
 
-app.get('/invite/:id', (req, res) => {
-  const event = eventRepository.findEvent({id: req.params.id});
+app.get('/invite/:id', async(req, res) => {
+  const event = await findEventById(req.params.id);
   const numberOfPlayersNeededPerTeam = event.numberOfPlayersNeeded / 2;
   const isConnected = !!req.user;
   if (!isConnected) {
@@ -120,23 +129,24 @@ app.get('/invite/:id', (req, res) => {
   });
 });
 
-app.post('/invite/:id', (req, res) => {
+app.post('/invite/:id', async(req, res) => {
   const user = userRepository.findUser({id: req.user.id});
   if (req.body.response === 'participate') {
-    eventRepository.participate({id: req.params.id}, user)
+    await participateToEvent(req.params.id, user);
   }
   if (req.body.response === 'cancel') {
-    eventRepository.withdraw({id: req.params.id}, user)
+    await withdrawFromEvent(req.params.id, user);
   }
   res.redirect(req.get('referer'));
 });
 app.post('/invite/*', ensureLoggedIn());
 
 app.get('/', (req, res) => res.render('pages/home', {user: userRepository.findUser({id: req.user})}));
-app.get('/events', (req, res) => {
+app.get('/events', async(req, res) => {
   const user = userRepository.findUser({id: req.user.id});
+  const events = await findUserEvents(user);
   res.render('pages/events', {
-    user: user, events: eventRepository.findEvents({owner: user}).map((event) => {
+    user: user, events: events.map((event) => {
       const numberOfPlayersNeededPerTeam = event.numberOfPlayersNeeded / 2;
       return {
         id: event.id,
@@ -146,8 +156,8 @@ app.get('/events', (req, res) => {
     })
   })
 });
-app.get('/events/:id', (req, res) => {
-  const event = eventRepository.findEvent({id: req.params.id});
+app.get('/events/:id', async(req, res) => {
+  const event = await findEventById(req.params.id);
   const numberOfPlayersNeededPerTeam = event.numberOfPlayersNeeded / 2;
   res.render('pages/edit', {
     eventId: event.id,
@@ -157,8 +167,8 @@ app.get('/events/:id', (req, res) => {
     players: event.players
   });
 });
-app.get('/events/:id/share', (req, res) => {
-  const event = eventRepository.findEvent({id: req.params.id});
+app.get('/events/:id/share', async(req, res) => {
+  const event = await findEventById(req.params.id);
   const numberOfPlayersNeededPerTeam = event.numberOfPlayersNeeded / 2;
   res.render('pages/share', {
     title: `${numberOfPlayersNeededPerTeam} vs ${numberOfPlayersNeededPerTeam}`,
@@ -167,9 +177,9 @@ app.get('/events/:id/share', (req, res) => {
     link: `/invite/${event.id}`
   });
 });
-app.post('/events/:id/share', (req, res) => {
+app.post('/events/:id/share', async(req, res) => {
   FB.setAccessToken(req.user.facebookAccessToken);
-  const event = eventRepository.findEvent({id: req.params.id});
+  const event = await findEventById(req.params.id);
   console.log(`${hostname}/invite/${event.id}`);
   const post = {
     message: `J'organise un match de foot le ${moment(event.date).format('LL')} et il manque ${event.numberOfPlayersNeeded - event.players.length} joueurs. 
@@ -190,8 +200,8 @@ app.post('/events/:id/share', (req, res) => {
   });
 });
 
-app.post('/events', (req, res) => {
-  const event = eventRepository.createEvent(
+app.post('/events', async(req, res) => {
+  const event = await createEvent(
     userRepository.findUser({id: req.user.id}),
     req.body.numberOfPlayersNeeded,
     req.body.date,

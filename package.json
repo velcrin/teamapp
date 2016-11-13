@@ -18,6 +18,7 @@
   "dependencies": {
     "@types/fb": "^0.0.21",
     "@types/lodash": "^4.14.38",
+    "@types/mongoose": "^4.5.41",
     "@types/nconf": "^0.0.32",
     "@types/node": "^6.0.46",
     "@types/passport": "^0.2.34",
@@ -32,6 +33,7 @@
     "font-awesome": "^4.6.3",
     "lodash": "^4.16.6",
     "moment": "^2.15.2",
+    "mongoose": "^4.6.7",
     "morgan": "^1.6.1",
     "nconf": "^0.8.4",
     "passport": "^0.2.2",

@@ -1,43 +1,33 @@
-import Event from '../model/Event';
+import {EventModel, EventDocument} from '../model/Event';
 import User from '../model/User';
-import {find, without, filter} from 'lodash';
-const UUID = require('uuid-js');
+import {without} from 'lodash';
 
-function createUUID() {
-  return UUID.create().toString();
+export async function createEvent(owner: User, numberOfPlayersNeeded: number, date: string, place: string): Promise<EventDocument> {
+  return await EventModel.create({
+    owner,
+    numberOfPlayersNeeded,
+    date,
+    place,
+    players: [owner]
+  });
 }
 
-export default class EventRepository {
-  events: Array<Event> = [];
+export async function findEventById(id: string): Promise<EventDocument> {
+  return await EventModel.findById(id).exec();
+}
 
-  createEvent(owner: User, numberOfPlayersNeeded: number, date: string, place: string) {
-    const newEvent: Event = {
-      id: createUUID(),
-      owner,
-      numberOfPlayersNeeded,
-      date,
-      place,
-      players: [owner]
-    };
-    this.events = [...this.events, newEvent];
-    return newEvent;
-  }
+export async function findUserEvents(user: User): Promise<Array<EventDocument>> {
+  return await EventModel.find({'owner.id': user.id}).exec();
+}
 
-  findEvent(matcher: Object): Event {
-    return find(this.events, matcher);
-  }
+export async function participateToEvent(eventId: string, newPlayer: User) {
+  const event = await this.findEventById(eventId);
+  event.players = [...event.players, newPlayer];
+  return await event.save();
+}
 
-  findEvents(matcher: Object): Array<Event> {
-    return filter(this.events, matcher);
-  }
-
-  participate(matcher: Object, newPlayer: User): void {
-    const event = this.findEvent(matcher);
-    event.players = [...event.players, newPlayer];
-  }
-
-  withdraw(matcher: Object, player: User): void {
-    const event = this.findEvent(matcher);
-    event.players = without(event.players, player);
-  }
+export async function withdrawFromEvent(eventId: string, player: User) {
+  const event = await this.findEventById(eventId);
+  event.players = without(event.players, player);
+  return await event.save();
 }

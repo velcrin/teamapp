@@ -30,7 +30,10 @@
         <p>Il nous manque encore <strong><%= numberOfSpotLeft %> joueurs</strong>!</p>
         <% } %>
         <% if(!isConnected) { %>
-        <p>Mais pour enregistrer ta participation on aurait besoin que tu te connectes</p>
+        <p>
+            Mais pour enregistrer ta participation on aurait besoin que tu te connectes.
+            Ne t'inquiète pas, on ne postera rien sur ton mur sans te demander avant!
+        </p>
         <a href="/login/facebook"><img class="Facebook-image" src="../img/loginFacebook.svg"></a>
         <% } else { %>
         <form action="/invite/<%= eventId %>" method="post">
