@@ -1,18 +1,22 @@
 import * as passport from 'passport';
 import * as moment from 'moment';
 import env from './lib/env/environment';
-import {find} from 'lodash';
 
 import mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/teamapp');
-import UserRepository from './lib/repositories/UserRepository';
+import {
+  createUser,
+  findUserById,
+  findUserByFacebookId
+} from './lib/repositories/UserRepository';
 import {
   createEvent,
   findEventById,
   findUserEvents,
   participateToEvent,
-  withdrawFromEvent
+  withdrawFromEvent,
+  isPlayingEvent
 } from './lib/repositories/EventRepository';
 
 const FB = require('fb');
@@ -22,8 +26,6 @@ const Strategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const {ensureLoggedIn} = require('connect-ensure-login');
-
-const userRepository = new UserRepository();
 
 const hostname = env.get('hostname') || 'http://localhost:3000';
 const app = express();
@@ -43,10 +45,10 @@ passport.use(new Strategy({
     callbackURL: `${hostname}/login/facebook/return`,
     profileFields: ['id', 'first_name', 'picture']
   },
-  function (accessToken, refreshToken, profile, cb) {
-    let user = userRepository.findUser(profile.id);
+  async(accessToken, refreshToken, profile, cb) => {
+    let user = await findUserByFacebookId(profile.id);
     if (!user) {
-      user = userRepository.createUser(profile);
+      user = await createUser(profile.name.givenName, profile.id, profile.photos[0].value);
     }
     return cb(null, {id: user.id, facebookAccessToken: accessToken});
   }));
@@ -84,7 +86,7 @@ app.get('/login/facebook', passport.authenticate('facebook', {scope: ['publish_a
 app.get('/login/facebook/return', passport.authenticate('facebook', {failureRedirect: '/login/facebook'}), async(req, res) => {
   if (req.session.event) {
     const event = await createEvent(
-      userRepository.findUser({id: req.user.id}),
+      await findUserById(req.user.id),
       req.session.event.numberOfPlayersNeeded,
       req.session.event.date,
       req.session.event.place);
@@ -123,14 +125,14 @@ app.get('/invite/:id', async(req, res) => {
     date: moment(event.date).format('LL'),
     eventId: event.id,
     isConnected,
-    isPlayer: isConnected && find(event.players, userRepository.findUser({id: req.user.id})),
+    isPlayer: isConnected && await isPlayingEvent(event.id, req.user.id),
     isFull: event.players.length >= event.numberOfPlayersNeeded,
     numberOfSpotLeft: event.numberOfPlayersNeeded - event.players.length
   });
 });
 
 app.post('/invite/:id', async(req, res) => {
-  const user = userRepository.findUser({id: req.user.id});
+  const user = await findUserById(req.user.id);
   if (req.body.response === 'participate') {
     await participateToEvent(req.params.id, user);
   }
@@ -141,9 +143,9 @@ app.post('/invite/:id', async(req, res) => {
 });
 app.post('/invite/*', ensureLoggedIn());
 
-app.get('/', (req, res) => res.render('pages/home', {user: userRepository.findUser({id: req.user})}));
+app.get('/', async(req, res) => res.render('pages/home', {user: !!req.user && await findUserById(req.user.id)}));
 app.get('/events', async(req, res) => {
-  const user = userRepository.findUser({id: req.user.id});
+  const user = await findUserById(req.user.id);
   const events = await findUserEvents(user);
   res.render('pages/events', {
     user: user, events: events.map((event) => {
@@ -180,7 +182,6 @@ app.get('/events/:id/share', async(req, res) => {
 app.post('/events/:id/share', async(req, res) => {
   FB.setAccessToken(req.user.facebookAccessToken);
   const event = await findEventById(req.params.id);
-  console.log(`${hostname}/invite/${event.id}`);
   const post = {
     message: `J'organise un match de foot le ${moment(event.date).format('LL')} et il manque ${event.numberOfPlayersNeeded - event.players.length} joueurs. 
     J'ai créé un évènement sur teamapp. N'hésitez pas à vous inscrire!`,
@@ -202,7 +203,7 @@ app.post('/events/:id/share', async(req, res) => {
 
 app.post('/events', async(req, res) => {
   const event = await createEvent(
-    userRepository.findUser({id: req.user.id}),
+    await findUserById(req.user.id),
     req.body.numberOfPlayersNeeded,
     req.body.date,
     req.body.place);
